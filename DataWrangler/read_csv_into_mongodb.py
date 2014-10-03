@@ -10,23 +10,7 @@ import logging # for debugging
 import urllib # for remote file download
 import zipfile # to handle archives
 
-# first ensure we have some arguments
-if len(sys.argv) == 4:
-    # TODO: error-checking for file_name argument
-    mongo_url = sys.argv[1]
-    database_name = sys.argv[2]
-    file_name_or_url = sys.argv[3]
-else:
-    usage = "Usage: mongo_url database_name file_name_or_url"
-    sys.stderr.write(usage)
-    exit()
-
-# timestamp to report on total script execution time
-startTime = time.time()
-# local variables and config
-delimiter = ','
-quote_character = '"'
-locale.setlocale(locale.LC_ALL, 'en_US.utf8')
+# setup logging
 LOG_FILENAME = 'logs/read_CSV.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG,)
 logToFile = True
@@ -37,7 +21,25 @@ def log(msg):
 def logerror(msg):
     if logToFile == True:
         logging.error(msg)
-    sys.stderr.write(msg)
+    sys.stderr.write(msg + '\n')
+
+# first ensure we have some arguments
+if len(sys.argv) == 4:
+    # TODO: error-checking for file_name argument
+    mongo_url = sys.argv[1]
+    database_name = sys.argv[2]
+    file_name_or_url = sys.argv[3]
+else:
+    logerror("Usage: mongo_url database_name file_name_or_url")
+    logerror("Example: python read_csv_into_mongodb.py mongodb://localhost ott http://www.octranspo1.com/files/google_transit.zip")
+    exit()
+
+# timestamp to report on total script execution time
+startTime = time.time()
+# local variables and config
+delimiter = ','
+quote_character = '"'
+locale.setlocale(locale.LC_ALL, 'en_US.utf8')
 
 # try connecting to db
 try:
@@ -84,7 +86,7 @@ if file_name_or_url[0:4] == 'http':
     try:
         # mkdir for downloaded data
         if not os.path.exists('downloads'):
-            log("Making directory for downloads")
+            log("Making directory for downloads at %s." % os.path.abspath('downloads'))
             os.makedirs('downloads')
         # TODO: extract filename from end of URL
         log("Retrieving file from %s..." % file_name_or_url)
@@ -96,7 +98,7 @@ if file_name_or_url[0:4] == 'http':
     zipf = zipfile.ZipFile("downloads/remote_archive.zip", mode='r')
     extracted_data_dir = 'extracted_data'
     if not os.path.exists(extracted_data_dir):
-        log("Making directory %s." % extracted_data_dir)
+        log("Making directory for data at %s." % os.path.abspath('extracted_data_dir'))
         os.makedirs(extracted_data_dir)
     for subfile in zipf.namelist():
         zipf.extract(subfile, extracted_data_dir)
