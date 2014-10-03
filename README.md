@@ -16,6 +16,8 @@ Example usage:
 ```
 python ./read_csv_into_mongodb.py mongodb://localhost ottawa http://www.octranspo1.com/files/google_transit.zip
 ```
+![Terminal Screenshot](/DataWrangler/docs/images/cmd-line.png?raw=true "Terminal Screenshot")
+
 ## MongoDB Browser
 In the webserver/python directory, run index.py. This will start a web server on port [8080](http://localhost:8080). From there you can see databases running on localhost. Follow the hyperlinks to view the collections and a sample of document data (limited to 10).
 
