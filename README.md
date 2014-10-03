@@ -14,6 +14,6 @@ To run, execute the file `read_csv_into_mongodb`. It takes 3 arguments:
 
 Example usage:
 ```
-python ./read_csv_into_mongodb.py mongodb://localhost ott http://www.octranspo1.com/files/google_transit.zip
+python ./read_csv_into_mongodb.py mongodb://localhost ottawa http://www.octranspo1.com/files/google_transit.zip
 ```
 This is very much a work in progress, but feedback and requests are welcome.
