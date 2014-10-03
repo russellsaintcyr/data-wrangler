@@ -19,6 +19,6 @@ python ./read_csv_into_mongodb.py mongodb://localhost ottawa http://www.octransp
 ## MongoDB Browser
 In the webserver/python directory, run index.py. This will start a web server on port 8080. From here you can see databases running on localhost. Follow the hyperlinks to view the collections and a sample of document data (limited to 10).
 
-![MongoDB Browser Screenshot](/docs/images/MongoDBBrowser.png?raw=true "MongoDB Browser Screenshot")
+![MongoDB Browser Screenshot](/DataWrangler/docs/images/MongoDBBrowser.png?raw=true "MongoDB Browser Screenshot")
 
 This is very much a work in progress, but feedback and requests are welcome.
