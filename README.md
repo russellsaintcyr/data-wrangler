@@ -6,7 +6,8 @@ Tested with bus route data from OC Transpo, the transportation authority for the
 
 The project structure can be imported into Eclipse as a PyDev project. 
 
-To run, execute the file read_csv_into_mongodb. It takes 3 arguments
+To run, execute the file `read_csv_into_mongodb`. It takes 3 arguments:
+
 1. The url for your MongoDB
 2. The name of your database. It will be created if it doesn't exist.
 3. The URL to the archive
